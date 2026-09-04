@@ -1,8 +1,8 @@
 {
-  "name": "Y4Y",
+  "name": "RCSTORE",
   "version": "0.0.1",
-  "description": "Catalogo online de Y4Y Yamira, Productos y mucho mas",
-  "productName": "Y4Y APP",
+  "description": "Catalogo online de RCSTORE, Productos y mucho mas",
+  "productName": "RCSTORE APP",
   "author": "Yyd Solution",
   "type": "module",
   "private": true,
