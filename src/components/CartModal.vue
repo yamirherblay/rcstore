@@ -246,7 +246,7 @@ function forgetDelivery() {
   draftName.value = '';
   draftAddress.value = '';
   draftRefs.value = '';
-  $q.notify({ type: 'info', message: 'Dirección olvidada', timeout: 2000, position: 'top' });
+  $q.notify({ type: 'info', textColor: 'dark', message: 'Dirección olvidada', timeout: 2000, position: 'top' });
 }
 
 function inc(id: string) {
@@ -263,6 +263,7 @@ function removeItemFromCart(id: string, name: string = '') {
   cart.remove(id);
   $q.notify({
     type: 'warning',
+    textColor: 'dark',
     message: `Eliminado: ${name}`,
     timeout: 2000,
     position: 'top',
@@ -304,23 +305,25 @@ async function buyWhatsApp() {
     if (opened) {
       $q.notify({
         type: 'positive',
+        textColor: 'dark',
         message: `Pedido ${ref} registrado. Abrimos WhatsApp para enviarlo.`,
         timeout: 4000,
       });
     } else {
       $q.notify({
         type: 'warning',
+        textColor: 'dark',
         message: `Pedido ${ref} registrado pero no pude abrir WhatsApp.`,
         timeout: 8000,
         actions: [
           {
             label: 'Abrir WhatsApp',
-            color: 'white',
+            color: 'dark',
             handler: () => {
               window.location.href = url;
             },
           },
-          { label: 'OK', color: 'white' },
+          { label: 'OK', color: 'dark' },
         ],
       });
     }

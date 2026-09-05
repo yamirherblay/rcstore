@@ -56,6 +56,7 @@ function addToCart() {
   cartStore.add(product.value);
   $q.notify({
     type: 'info',
+    textColor: 'dark',
     message: `Agregado: ${product.value.name}`,
     timeout: 2000,
   });

@@ -22,6 +22,15 @@
             class="text-white"
             style="font-family: 'Manrope', sans-serif; letter-spacing: 1px;"
           />
+          <q-btn
+            flat
+            round
+            dense
+            icon="currency_exchange"
+            class="text-white"
+            aria-label="Cambio del día"
+            @click="showRates = true"
+          />
         </div>
 
         <q-btn
@@ -106,10 +115,10 @@
           @click="showCart = true"
         />
         <q-tab
-          name="help"
-          icon="help"
-          label="Ayuda"
-          @click="showHelp = true"
+          name="rates"
+          icon="currency_exchange"
+          label="Cambio"
+          @click="showRates = true"
         />
       </q-tabs>
       
@@ -128,6 +137,7 @@
 
     <cart-modal v-model="showCart" />
     <HelpModal v-model="showHelp" />
+    <RemesasModal v-model="showRates" />
     <ProductPreview />
   </q-layout>
 </template>
@@ -143,12 +153,14 @@ import { formatWhatsAppUrl, whatsappConfig } from 'src/config/whatsapp';
 import ProductPreview from 'components/catalog/ProductPreview.vue';
 import CartModal from 'components/CartModal.vue';
 import HelpModal from 'components/HelpModal.vue';
+import RemesasModal from 'components/remesas/RemesasModal.vue';
 
 const $q = useQuasar();
 const router = useRouter();
 const route = useRoute();
 const showCart = ref(false);
 const showHelp = ref(false);
+const showRates = ref(false);
 const cart = useCartStore();
 const auth = useAuthStore();
 const adminRoute = computed(() =>
@@ -180,6 +192,12 @@ watch(showCart, (val) => {
 });
 
 watch(showHelp, (val) => {
+  if (!val) {
+    activeTab.value = activeTabFromRoute(route.path);
+  }
+});
+
+watch(showRates, (val) => {
   if (!val) {
     activeTab.value = activeTabFromRoute(route.path);
   }

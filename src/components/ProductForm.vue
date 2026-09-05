@@ -326,6 +326,7 @@ async function onFileSelected(val: File | File[] | null) {
     $q.notify({
       message: 'Imagen subida correctamente',
       color: 'positive',
+      textColor: 'dark',
       icon: 'check_circle',
       position: 'top',
       timeout: 2000,
@@ -393,6 +394,7 @@ async function onSubmit() {
       $q.notify({
         message: 'Producto creado correctamente',
         color: 'positive',
+        textColor: 'dark',
         icon: 'check_circle',
       });
     } else {
@@ -407,6 +409,7 @@ async function onSubmit() {
       $q.notify({
         message: 'Producto actualizado correctamente',
         color: 'positive',
+        textColor: 'dark',
         icon: 'check_circle',
       });
     }

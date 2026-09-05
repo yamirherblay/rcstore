@@ -19,21 +19,32 @@
           :to="branding.hero.ctaLink"
         />
 
-        <div class="trust-row hero-enter-trust" role="list" aria-label="Ventajas de comprar en RCStore">
-          <span class="trust-item" role="listitem">
-            <q-icon name="local_shipping" size="14px" />
-            Envíos a domicilio
-          </span>
-          <span class="trust-dot" aria-hidden="true">•</span>
-          <span class="trust-item" role="listitem">
-            <q-icon name="payments" size="14px" />
-            Pagos CUP / USD
-          </span>
-          <span class="trust-dot" aria-hidden="true">•</span>
-          <span class="trust-item" role="listitem">
-            <q-icon name="fa-brands fa-whatsapp" size="14px" />
-            Pedidos por WhatsApp
-          </span>
+        
+      </div>
+    </section>
+
+    <section class="feature-strip section-reveal" role="list" aria-label="Servicios de RCStore">
+      <div class="feature-item" role="listitem">
+        <q-icon name="local_shipping" size="26px" class="feature-icon" />
+        <div class="feature-text">
+          <div class="feature-title">Envíos a domicilio</div>
+          <div class="feature-sub">Entregamos donde estés</div>
+        </div>
+      </div>
+      <div class="feature-sep" aria-hidden="true"></div>
+      <div class="feature-item" role="listitem">
+        <q-icon name="payments" size="26px" class="feature-icon" />
+        <div class="feature-text">
+          <div class="feature-title">Pagos en varias monedas</div>
+          <div class="feature-sub">Elige cómo quieres pagar</div>
+        </div>
+      </div>
+      <div class="feature-sep" aria-hidden="true"></div>
+      <div class="feature-item" role="listitem">
+        <q-icon name="workspace_premium" size="26px" class="feature-icon" />
+        <div class="feature-text">
+          <div class="feature-title">Calidad garantizada</div>
+          <div class="feature-sub">Productos seleccionados para ti</div>
         </div>
       </div>
     </section>
@@ -202,7 +213,7 @@ useMeta({
       transparent 60%
     ),
     linear-gradient(180deg, #121212 0%, #17130a 60%, #131313 100%);
-  min-height: 46vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,7 +238,7 @@ useMeta({
   z-index: 1;
   gap: 12px;
   padding-top: 24px;
-  padding-bottom: 36px;
+  padding-bottom: 24px;
 }
 
 .hero-eyebrow {
@@ -239,8 +250,8 @@ useMeta({
 .hero-title {
   font-family: 'Outfit', sans-serif;
   font-weight: 300;
-  font-size: clamp(2.2rem, 8vw, 3.5rem);
-  line-height: 1.05;
+  font-size: clamp(2.6rem, 10vw, 4.8rem);
+  line-height: 1.02;
   letter-spacing: -0.01em;
   color: #f5f5f3;
   margin: 0;
@@ -259,7 +270,7 @@ useMeta({
 }
 
 .hero-cta {
-  margin-top: 8px;
+  margin-top: 16px;
   font-size: 1rem;
 }
 
@@ -269,8 +280,8 @@ useMeta({
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-top: 6px;
-  padding-top: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid rgba(212, 175, 55, 0.25);
 }
 
@@ -337,6 +348,69 @@ useMeta({
 .hero-enter-trust {
   animation: hero-fade-in 0.6s ease both;
   animation-delay: 0.65s;
+}
+
+/* Value proposition strip */
+.feature-strip {
+  background: #151515;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 16px;
+}
+
+.feature-icon {
+  color: #d4af37;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.feature-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f5f5f3;
+}
+
+.feature-sub {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  color: #a3a39e;
+}
+
+.feature-sep {
+  width: 1px;
+  background: rgba(212, 175, 55, 0.15);
+}
+
+@media (max-width: 767px) {
+  .feature-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-item {
+    justify-content: flex-start;
+    padding: 14px 20px;
+  }
+
+  .feature-sep {
+    width: auto;
+    height: 1px;
+  }
 }
 
 /* Shelf (featured products) */
@@ -523,7 +597,7 @@ useMeta({
 
 @media (min-width: 768px) {
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 5rem;
   }
 
   .trust-row {
@@ -533,7 +607,7 @@ useMeta({
 
 @media (max-width: 767px) {
   .hero-section {
-    min-height: 40vh;
+    min-height: 52vh;
   }
 }
 

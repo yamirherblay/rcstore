@@ -21,8 +21,8 @@
               <q-item-section class="text-muted">Cerrar sesión</q-item-section>
             </q-item>
           </q-menu>
-        </q-btn>
-        <q-btn flat dense round icon="store" @click="$router.push({ name: 'home' })" class="q-ml-xs" />
+        </q-btn><q-btn flat dense round icon="currency_exchange" @click="$router.push({ name: 'admin-cambio' })" class="q-ml-xs" />
+        <q-btn flat dense round icon="store" @click="$router.push({ name: 'catalogo' })" class="q-ml-xs" />
       </q-toolbar>
     </q-header>
 
@@ -60,6 +60,19 @@
           <q-item-section side v-if="ordersStore.pendingCount > 0">
             <q-badge color="red-5" text-color="dark">{{ ordersStore.pendingCount }}</q-badge>
           </q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+          v-ripple
+          :active="$route.name === 'admin-cambio'"
+          active-class="text-primary rc-active"
+          @click="$router.push({ name: 'admin-cambio' })"
+        >
+          <q-item-section avatar>
+            <q-icon name="currency_exchange" class="text-grey-5" />
+          </q-item-section>
+          <q-item-section class="text-weight-medium">Cambio Moneda</q-item-section>
         </q-item>
 
         <q-item

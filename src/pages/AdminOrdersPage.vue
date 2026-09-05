@@ -278,6 +278,7 @@ async function copyToken(token: string) {
     $q.notify({
       message: 'Token copiado',
       color: 'positive',
+      textColor: 'dark',
       icon: 'check_circle',
       timeout: 1500,
     });
@@ -338,6 +339,7 @@ async function saveStatus() {
       $q.notify({
         message: 'Estado actualizado',
         color: 'positive',
+        textColor: 'dark',
         icon: 'check_circle',
         timeout: 2000,
       });

@@ -143,6 +143,7 @@ function handleAddToCart(product: Product) {
   cartStore.add(product);
   $q.notify({
     type: 'info',
+    textColor: 'dark',
     message: `Agregado al carrito: ${product.name}`,
     timeout: 2000,
   });

@@ -338,7 +338,8 @@ function confirmToggle(row: Product) {
     title: 'Cambiar disponibilidad',
     message: `¿Estás seguro de cambiar "${row.name}" de ${row.estado} a ${newEstado}?`,
     cancel: { label: 'Cancelar', flat: true },
-    ok: { label: 'Aceptar', color: 'primary' },
+    ok: { label: 'Aceptar', color: 'primary', textColor: 'dark' },
+    dark: true,
     persistent: true,
   }).onOk(() => { void toggleVisibility(row, newEstado); });
 }
@@ -361,6 +362,7 @@ async function toggleVisibility(row: Product, newEstado: string) {
     $q.notify({
       message: `"${row.name}" ahora está ${newEstado}`,
       color: 'positive',
+      textColor: 'dark',
       icon: 'check_circle',
       timeout: 2000,
     });
@@ -440,6 +442,7 @@ function confirmDelete(row: Product) {
     message: `¿Estás seguro de eliminar "${row.name}"?`,
     cancel: { label: 'Cancelar', flat: true },
     ok: { label: 'Eliminar', color: 'negative' },
+    dark: true,
     persistent: true,
   }).onOk(() => { void handleDelete(row); });
 }
@@ -453,6 +456,7 @@ async function handleDelete(row: Product) {
     $q.notify({
       message: 'Producto eliminado correctamente',
       color: 'positive',
+      textColor: 'dark',
       icon: 'check_circle',
     });
   } else {

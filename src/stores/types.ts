@@ -94,3 +94,13 @@ export interface OrderProductRow {
   price_at_order: number | null;
   products?: { name: string; image?: string; currency?: string } | null;
 }
+
+export interface RemesaRate {
+  id?: string;
+  negocio_id: string;
+  rate_cup: number | null;
+  rate_usd: number | null;
+  rate_zelle: number | null;
+  rate_euro: number | null;
+  created_at?: string;
+}
