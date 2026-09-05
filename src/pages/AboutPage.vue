@@ -2,17 +2,17 @@
   <q-page class="about-page q-pa-lg">
     <div class="row justify-center">
       <div class="col-12 col-md-8 col-lg-6">
-        <div class="about-title text-center q-mb-lg">Y4Y YAMIRA</div>
+        <div class="about-title text-center q-mb-lg">{{ branding.name }}</div>
 
-        <div class="linea-vip q-mx-auto q-mb-lg" style="width: 60px;"></div>
+        <div class="linea-vip q-mx-auto q-mb-lg" style="width: 60px; height: 1px; background: rgba(212,175,55,.4);"></div>
 
         <div class="about-content">
-          <p>Y4Y Yamira es tu tienda de productos variados: electrodomésticos, moda y mucho más, siempre con la garantía de una atención cercana y personalizada.</p>
-          <p>Trabajamos con precios en CUP y puedes pedir por WhatsApp, con la comodidad de retiro o envío a domicilio.</p>
-          <p>Nuestro compromiso: que todo esté a tu alcance.</p>
+          <p>{{ branding.about.content.split('\n\n')[0] }}</p>
+          <p>{{ branding.about.content.split('\n\n')[1] }}</p>
+          <p>{{ branding.about.content.split('\n\n')[2] }}</p>
         </div>
 
-        <div class="linea-vip q-mx-auto q-my-lg" style="width: 60px;"></div>
+        <div class="linea-vip q-mx-auto q-my-lg" style="width: 60px; height: 1px; background: rgba(212,175,55,.4);"></div>
 
         <div class="text-center text-gold" style="letter-spacing: 8px; font-size: 1.2rem;">
           ★ ★ ★
@@ -42,22 +42,23 @@ useMeta({
 
 <style scoped>
 .about-page {
-  background: #FBF5EE;
+  background: #131313;
   min-height: 60vh;
 }
 
 .about-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
   font-size: 2rem;
-  letter-spacing: 4px;
-  color: #241A24;
+  letter-spacing: 0.08em;
+  color: #f5f5f3;
 }
 
 .about-content {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 1rem;
   line-height: 1.7;
-  color: #241A24;
+  color: #e5e2e1;
 }
 
 .about-content p {
@@ -65,6 +66,6 @@ useMeta({
 }
 
 .text-gold {
-  color: #C98A3D;
+  color: #d4af37;
 }
 </style>

@@ -11,7 +11,7 @@
           @click="preview.open(product)"
         >
           <div v-if="product.oferta && product.estado !== 'Agotado'" class="oferta-ribbon">
-            <q-badge color="accent" text-color="white" label="Oferta" class="badge-oferta" />
+            <q-badge color="accent" text-color="dark" label="Oferta" class="badge-oferta" />
           </div>
           <div v-if="product.new" class="absolute-top-left q-pa-xs badge-new-wrap">
             <q-badge color="blue" text-color="white" label="NUEVO" class="badge-new" />
@@ -35,7 +35,7 @@
           </div>
           <q-badge
             :color="product.estado === 'Disponible' ? 'info' : 'negative'"
-            :text-color="'white'"
+            :text-color="product.estado === 'Disponible' ? 'dark' : 'white'"
             :label="product.estado"
             class="list-status"
           />
@@ -57,6 +57,7 @@
             icon="shopping_cart"
             size="sm"
             color="primary"
+            text-color="dark"
             :disable="product.estado === 'Agotado'"
             @click="$emit('add-to-cart', product)"
           />
@@ -86,26 +87,31 @@ defineEmits<{
 <style scoped>
 .product-list-item {
   height: 100%;
-  border-radius: 5px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
   overflow: hidden;
   transition:
     transform 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .product-list-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.12);
 }
 
 .product-list-item:hover .gold-border-top {
-  border-image: linear-gradient(90deg, #c98a3d, #d9a45c) 1;
+  border-image: linear-gradient(90deg, #d4af37, #e5c378) 1;
 }
 
 .list-image-col {
   width: 110px;
   min-width: 110px;
   overflow: hidden;
+  background: #161616;
 }
 
 @media (min-width: 600px) {
@@ -124,12 +130,11 @@ defineEmits<{
 }
 
 .list-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #241A24;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #f5f5f3;
   line-height: 1.2;
   cursor: pointer;
 }
@@ -139,22 +144,22 @@ defineEmits<{
 }
 
 .list-desc {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.8rem;
   line-height: 1.3;
   margin-top: 2px;
-  color: #4A3F49;
+  color: #a3a39e;
 }
 
 .list-price {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   font-weight: 400;
-  color: #241A24;
+  color: #e5c378;
 }
 
 .list-status {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
   padding: 2px 6px;
@@ -175,20 +180,20 @@ defineEmits<{
 
 .old-price {
   text-decoration: line-through;
-  opacity: 0.45;
-  color: #dc2626;
+  opacity: 0.55;
+  color: #e57373;
   margin-right: 6px;
   font-size: 0.85em;
 }
 
 .sale-price {
   font-weight: 600;
-  color: #241A24;
+  color: #e5c378;
 }
 
 .badge-oferta,
 .badge-new {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   letter-spacing: 1px;
 }
 

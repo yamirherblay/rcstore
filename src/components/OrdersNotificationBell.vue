@@ -6,7 +6,7 @@
     icon="receipt_long"
     @click="$router.push({ name: 'admin-pedidos' })"
   >
-    <q-badge v-if="pendingCount > 0" color="red-5" text-color="white" floating>
+    <q-badge v-if="pendingCount > 0" color="red-5" text-color="dark" floating>
       {{ pendingCount }}
     </q-badge>
     <q-tooltip>Pedidos pendientes</q-tooltip>

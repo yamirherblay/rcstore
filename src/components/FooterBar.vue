@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="bg-primary text-white" bordered>
+  <q-footer class="bg-dark text-white rc-footerbar" bordered>
     <q-toolbar class="q-py-md q-px-md">
       <div class="row items-center justify-between full-width q-col-gutter-md">
         <div class="row items-center q-gutter-sm">
@@ -9,8 +9,8 @@
             style="width: 44px; height: auto;"
           />
           <div>
-            <div class="text-weight-bold" style="font-family: 'Rubik', sans-serif; letter-spacing: 2px; font-size: 1rem;">{{ brand }}</div>
-            <div class="text-caption text-grey-4" style="letter-spacing: 1px;">TODO A TU ALCANCE</div>
+            <div class="text-weight-bold font-display" style="letter-spacing: 2px; font-size: 1rem;">{{ brand }}</div>
+            <div class="text-caption text-muted" style="letter-spacing: 1px;">TODO A TU ALCANCE</div>
           </div>
         </div>
 
@@ -50,15 +50,15 @@
         </div>
       </div>
     </q-toolbar>
-    <div class="text-center q-py-sm" style="color: #C98A3D; letter-spacing: 8px; font-size: 1rem;">
+    <div class="text-center q-py-sm" style="color: #d4af37; letter-spacing: 8px; font-size: 1rem;">
       ★ ★ ★
     </div>
-    <div class="q-px-md q-py-xs text-caption text-center text-grey-4">
-      <router-link to="/contacto" class="text-grey-4" style="text-decoration: none;">Contacto</router-link>
+    <div class="q-px-md q-py-xs text-caption text-center text-muted">
+      <router-link to="/contacto" class="text-muted" style="text-decoration: none;">Contacto</router-link>
       <span class="q-mx-sm">·</span>
-      <router-link to="/acerca" class="text-grey-4" style="text-decoration: none;">Acerca</router-link>
+      <router-link to="/acerca" class="text-muted" style="text-decoration: none;">Acerca</router-link>
       <span class="q-mx-sm">·</span>
-      <router-link to="/login" class="text-grey-4" style="text-decoration: none;">Admin</router-link>
+      <router-link to="/login" class="text-muted" style="text-decoration: none;">Admin</router-link>
     </div>
     <div class="q-px-md q-py-sm text-caption text-center text-grey-5">
       © {{ year }} {{ brand }} — Todos los derechos reservados.
@@ -78,7 +78,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  brand: 'Y4Y Yamira',
+  brand: 'RCStore',
   phone: '',
   email: '',
   whatsapp: '',
@@ -87,3 +87,9 @@ const props = withDefaults(defineProps<Props>(), {
 const year = computed(() => new Date().getFullYear());
 const { brand, phone, email, whatsapp } = props;
 </script>
+
+<style scoped>
+.rc-footerbar {
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+}
+</style>

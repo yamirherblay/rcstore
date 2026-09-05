@@ -27,13 +27,13 @@ useMeta({
 
 <style scoped>
 .catalog-page {
-  background: #FBF5EE;
+  background: #131313;
 }
 
 .catalog-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.75rem;
-  letter-spacing: 3px;
-  color: #241A24;
+  letter-spacing: 0.04em;
+  color: #f5f5f3;
 }
 </style>

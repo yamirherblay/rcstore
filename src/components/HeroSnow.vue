@@ -1,18 +1,18 @@
 <template>
-  <canvas ref="canvasRef" class="hero-rain" aria-hidden="true"></canvas>
+  <canvas ref="canvasRef" class="hero-snow" aria-hidden="true"></canvas>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useHeroRain } from 'src/composables/useHeroRain';
+import { useHeroSnow } from 'src/composables/useHeroSnow';
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 
-useHeroRain(canvasRef, { density: 'medium', goldRatio: 0.15 });
+useHeroSnow(canvasRef, { density: 'medium', goldRatio: 0.15 });
 </script>
 
 <style scoped>
-.hero-rain {
+.hero-snow {
   position: absolute;
   inset: 0;
   width: 100%;

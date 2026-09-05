@@ -1,9 +1,9 @@
 <template>
   <div>
     <q-btn flat dense round icon="notifications" @click="openNotificationMenu">
-      <q-badge v-if="count > 0" color="green" text-color="white" floating>{{ count }}</q-badge>
+      <q-badge v-if="count > 0" color="green" text-color="dark" floating>{{ count }}</q-badge>
     </q-btn>
-    <q-menu v-model="menuOpen" :context-menu="false" anchor="bottom right" self="top right">
+    <q-menu v-model="menuOpen" class="rc-notif-menu" :context-menu="false" anchor="bottom right" self="top right">
       <q-list style="min-width: 260px; max-height: 60vh" separator>
         <q-item>
           <q-item-section class="text-subtitle2">Cambios recientes</q-item-section>
@@ -13,7 +13,7 @@
         </q-item>
         <q-separator />
         <q-item v-if="count === 0">
-          <q-item-section class="text-grey">Sin cambios</q-item-section>
+          <q-item-section class="text-muted">Sin cambios</q-item-section>
         </q-item>
         <q-item v-for="(c, idx) in items" :key="c.at + '-' + idx">
           <q-item-section avatar>
@@ -70,4 +70,14 @@ function openNotificationMenu() {
   return openMenu;
 }
 </script>
-<style scoped></style>
+<style scoped>
+.rc-notif-menu {
+  background: #222;
+  color: #e5e2e1;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.rc-notif-menu :deep(.q-separator) {
+  background: rgba(255, 255, 255, 0.1);
+}
+</style>

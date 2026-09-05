@@ -12,11 +12,13 @@
           v-model="searchQuery"
           dense
           outlined
+          dark
           placeholder="Buscar productos..."
           clearable
+          class="catalog-search"
         >
           <template #prepend>
-            <q-icon name="search" />
+            <q-icon name="search" class="search-icon" />
           </template>
         </q-input>
       </div>
@@ -35,8 +37,8 @@
       @add-to-cart="handleAddToCart"
     >
       <template #empty>
-        <div v-if="filterQuery">No se encontraron productos para "{{ filterQuery }}"</div>
-        <div v-else>No hay productos disponibles en esta categoría.</div>
+        <div v-if="filterQuery" class="text-muted">No se encontraron productos para "{{ filterQuery }}"</div>
+        <div v-else class="text-muted">No hay productos disponibles en esta categoría.</div>
       </template>
     </ProductGrid>
 
@@ -176,10 +178,43 @@ onBeforeUnmount(() => observer?.disconnect());
 
 <style scoped>
 .catalog-page {
-  background: #eae0d3;
+  background: #131313;
+  color: #e5e2e1;
 }
 
 .sentinel {
   height: 1px;
+}
+
+.catalog-search {
+  /* touch target + visible field */
+  min-height: 44px;
+
+  :deep(.q-field__control) {
+    background: #1a1a1a;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-radius: 4px;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  :deep(.q-field__control:hover) {
+    border-color: rgba(212, 175, 55, 0.7);
+  }
+
+  :deep(.q-field__control:focus-within) {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.35), 0 8px 24px -8px rgba(212, 175, 55, 0.25);
+  }
+
+  :deep(.search-icon) {
+    color: #d4af37;
+  }
+
+  :deep(.q-field__native),
+  :deep(.q-field__input) {
+    color: #e5e2e1;
+  }
 }
 </style>

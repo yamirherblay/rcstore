@@ -19,9 +19,6 @@
             class="preview-image"
           />
         </div>
- <div class="preview-image-wrap">
-        currentProduct?.descripcion
-        </div>
         <q-btn
           v-if="currentProduct && currentProduct.estado !== 'Agotado'"
           class="preview-add q-mt-lg"
@@ -68,7 +65,7 @@ function addToCart() {
 
 <style lang="scss">
 .preview-card {
-  background: rgba(58, 14, 56, 0.92);
+  background: rgba(19, 19, 19, 0.96);
   backdrop-filter: blur(8px);
   width: 100vw;
   height: 100vh;
@@ -94,9 +91,9 @@ function addToCart() {
 }
 
 .preview-add {
-  border-color: #C98A3D;
-  color: #C98A3D;
-  font-family: 'Nunito Sans', sans-serif;
+  border-color: #d4af37;
+  color: #d4af37;
+  font-family: 'Manrope', sans-serif;
   font-weight: 500;
 }
 

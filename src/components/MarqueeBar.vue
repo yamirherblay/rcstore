@@ -35,8 +35,8 @@ defineEmits<{
   top: 0;
   left: 0;
   right: 0;
-  background: #241A24;
-  color: #C98A3D;
+  background: #171717;
+  color: #d4af37;
   overflow: hidden;
   display: flex;
   align-items: center;

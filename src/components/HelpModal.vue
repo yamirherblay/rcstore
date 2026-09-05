@@ -6,7 +6,7 @@
     :maximized="$q.screen.lt.md"
     :persistent="$q.screen.lt.md"
   >
-    <q-card :style="$q.screen.lt.md ? '' : 'min-width: 420px; max-width: 640px; width: 100%'">
+    <q-card :style="$q.screen.lt.md ? '' : 'min-width: 420px; max-width: 640px; width: 100%'" class="help-modal-card">
       <q-card-section class="row items-center q-pb-none">
         <div class="row items-center">
           <q-icon name="help" color="secondary" size="md" class="q-mr-sm" />
@@ -16,7 +16,7 @@
         <q-btn icon="close" flat round dense v-close-popup />
       </q-card-section>
 
-      <q-separator class="bg-grey-3" />
+      <q-separator class="bg-white-10" />
 
       <q-scroll-area style="height: 60vh; max-height: 480px;"
         class="q-pa-md"
@@ -48,14 +48,15 @@
         </div>
       </q-scroll-area>
 
-      <q-separator class="bg-grey-3" />
+      <q-separator class="bg-white-10" />
 
       <q-card-section class="row items-center justify-between q-gutter-sm">
-        <div class="text-grey-7 text-caption">
+        <div class="text-muted text-caption">
           ¿No encuentras tu respuesta?
         </div>
         <q-btn
           color="positive"
+          text-color="dark"
           icon="fa-brands fa-whatsapp"
           label="Escríbenos"
           no-caps
@@ -86,28 +87,36 @@ const whatsappUrl = formatWhatsAppUrl(whatsappConfig.messageTemplates.contact())
 </script>
 
 <style scoped>
+.help-modal-card {
+  background: #222;
+  color: #e5e2e1;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
 .fa-subtitle-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.5px;
-  color: #1a1a2e;
+  color: #f5f5f3;
 }
 
 .faq-item {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.95rem;
 }
 
 .faq-answer {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.9rem;
   line-height: 1.5;
-  color: #374151;
+  color: #d8d5d2;
 }
 
 .faq-answer-card {
   border-radius: 0;
+  background: #1a1a1a;
+  color: #d8d5d2;
 }
 
 @media (prefers-reduced-motion: reduce) {

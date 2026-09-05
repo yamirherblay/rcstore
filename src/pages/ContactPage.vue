@@ -46,6 +46,7 @@
           <q-card-actions class="q-pa-md">
             <q-btn
               color="positive"
+              text-color="dark"
               icon="fa-brands fa-whatsapp"
               label="Escribir por WhatsApp"
               class="full-width"
@@ -84,18 +85,30 @@ const { sendContactMessage } = useWhatsApp();
 
 <style scoped>
 .contact-page {
-  background: #FBF5EE;
+  background: #131313;
   min-height: 60vh;
 }
 
 .contact-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
   font-size: 2rem;
-  letter-spacing: 4px;
-  color: #241A24;
+  letter-spacing: 0.08em;
+  color: #f5f5f3;
 }
 
 .contact-card {
+  background: #1a1a1a;
+  color: #e5e2e1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
+
+  :deep(.q-item__label) {
+    color: #f5f5f3;
+  }
+
+  :deep(.q-item__label--caption) {
+    color: #a3a39e;
+  }
 }
 </style>

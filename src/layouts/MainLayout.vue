@@ -1,17 +1,17 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-primary text-white" elevated>
+    <q-header class="bg-dark text-white rc-header" elevated>
       <q-toolbar>
         <q-toolbar-title>
           <q-btn flat no-caps :to="'/'">
-            <span class="text-white text-weight-bold" style="font-family: 'Rubik', sans-serif; letter-spacing: 2px; font-size: 1.15rem;">Y4Y </span>
-            <span class="text-gold text-weight-bold" style="font-family: 'Rubik', sans-serif; letter-spacing: 2px; font-size: 1.15rem;">YAMIRA</span>
+            <span class="text-white text-weight-bold font-display" style="letter-spacing: 3px; font-size: 1.15rem;">RC</span>
+            <span class="text-gold text-weight-bold font-display" style="letter-spacing: 3px; font-size: 1.15rem;">STORE</span>
           </q-btn>
         </q-toolbar-title>
 
         <div class="gt-sm row items-center q-gutter-x-sm">
-          <q-btn flat dense label="Inicio" to="/" class="text-white" style="font-family: 'Nunito Sans', sans-serif; letter-spacing: 1px;" />
-          <q-btn flat dense label="Catálogo" to="/catalogo" class="text-white" style="font-family: 'Nunito Sans', sans-serif; letter-spacing: 1px;" />
+          <q-btn flat dense label="Inicio" to="/" class="text-white" style="font-family: 'Manrope', sans-serif; letter-spacing: 1px;" />
+          <q-btn flat dense label="Catálogo" to="/catalogo" class="text-white" style="font-family: 'Manrope', sans-serif; letter-spacing: 1px;" />
           <q-btn
             flat
             dense
@@ -20,7 +20,7 @@
             icon="fa-brands fa-whatsapp"
             label="WhatsApp"
             class="text-white"
-            style="font-family: 'Nunito Sans', sans-serif; letter-spacing: 1px;"
+            style="font-family: 'Manrope', sans-serif; letter-spacing: 1px;"
           />
         </div>
 
@@ -50,7 +50,7 @@
           class="q-ml-sm text-white"
           @click="showCart = true"
         >
-          <q-badge color="accent" text-color="white" floating v-if="cart.count">
+          <q-badge color="primary" text-color="dark" floating v-if="cart.count">
             {{ cart.count }}
           </q-badge>
         </q-btn>
@@ -61,7 +61,7 @@
       <router-view />
     </q-page-container>
 
-    <q-footer v-if="$q.screen.lt.md" class="bg-primary text-white bottom-nav" bordered fixed>
+    <q-footer v-if="$q.screen.lt.md" class="rc-footer bottom-nav" bordered fixed>
       <div class="search-panel" :class="{ 'search-open': searchActive }">
         <q-input
           ref="searchInputRef"
@@ -71,7 +71,7 @@
           placeholder="Buscar productos..."
           class="search-input q-px-sm q-py-xs"
           dark
-          bg-color="primary"
+          bg-color="grey-9"
           @keyup.enter="doSearch"
         >
           <template v-slot:prepend>
@@ -85,9 +85,9 @@
 
       <q-tabs
         v-model="activeTab"
-        active-color="secondary"
+        active-color="primary"
         indicator-color="transparent"
-        class="text-grey-4"
+        class="text-grey-5"
         narrow-indicator
         dense
       >
@@ -120,6 +120,7 @@
       round
       size="lg"
       color="positive"
+      text-color="dark"
       icon="fa-brands fa-whatsapp"
       :aria-label="'Escribir por WhatsApp'"
       @click="openWhatsApp"
@@ -217,8 +218,19 @@ function openWhatsApp() {
 </script>
 
 <style lang="scss">
-.text-gold {
-  color: #C98A3D;
+.rc-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.rc-footer {
+  background: #151515;
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  color: #e5e2e1;
+
+  .q-tab--active {
+    color: #e5c378;
+  }
 }
 
 .fab-whatsapp {
@@ -260,7 +272,7 @@ function openWhatsApp() {
   }
 
   :deep(.q-field__native) {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 0.9rem;
   }
 }
@@ -280,7 +292,7 @@ function openWhatsApp() {
   .q-tab__label {
     font-size: 0.8rem;
     font-weight: 500;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
   }
 
   @media (hover: hover) {

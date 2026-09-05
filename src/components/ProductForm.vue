@@ -8,6 +8,7 @@
           accept="image/*"
           dense
           outlined
+          dark
           clearable
           label="Seleccionar imagen"
           @update:model-value="onFileSelected"
@@ -26,6 +27,7 @@
           label="Nombre"
           dense
           outlined
+          dark
           :rules="[(val) => !!val?.trim() || 'El nombre es obligatorio']"
         />
       </div>
@@ -36,6 +38,7 @@
           label="Precio"
           dense
           outlined
+          dark
           :rules="[(val) => val > 0 || 'El precio debe ser mayor a 0']"
         />
       </div>
@@ -46,6 +49,7 @@
           label="Moneda"
           dense
           outlined
+          dark
           emit-value
           map-options
         />
@@ -58,6 +62,7 @@
           clearable
           dense
           outlined
+          dark
           emit-value
           map-options
           use-input
@@ -74,15 +79,16 @@
           required
           dense
           outlined
+          dark
           emit-value
           map-options
         />
       </div>
       <div class="col-6">
-        <q-toggle v-model="localProduct.new" label="Nuevo" />
+        <q-toggle dark v-model="localProduct.new" label="Nuevo" />
       </div>
       <div class="col-6">
-        <q-toggle v-model="localProduct.oferta" label="En oferta" />
+        <q-toggle dark v-model="localProduct.oferta" label="En oferta" />
       </div>
       <div class="col-12 col-sm-6" v-if="localProduct.oferta">
         <q-input
@@ -91,6 +97,7 @@
           label="Precio de la Oferta"
           dense
           outlined
+          dark
         />
       </div>
       <div class="col-12">
@@ -100,19 +107,21 @@
           label="Descripción"
           dense
           outlined
+          dark
           autogrow
         />
       </div>
     </div>
     <div class="row justify-end q-gutter-sm q-mt-md">
-      <q-btn flat color="grey-7" no-caps label="Cancelar" @click="onCancel" style="font-family: 'Nunito Sans', sans-serif;" />
+      <q-btn flat color="grey-5" no-caps label="Cancelar" @click="onCancel" style="font-family: 'Manrope', sans-serif;" />
       <q-btn
         color="primary"
+        text-color="dark"
         no-caps
         :label="mode === 'add' ? 'Crear' : 'Guardar'"
         type="submit"
         :disable="!isFormValid"
-        style="font-family: 'Nunito Sans', sans-serif; letter-spacing: 0.5px;"
+        style="font-family: 'Manrope', sans-serif; letter-spacing: 0.5px;"
       />
     </div>
   </q-form>

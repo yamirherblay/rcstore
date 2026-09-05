@@ -9,7 +9,7 @@
       @click.stop="preview.open(product)"
     >
       <div v-if="product.oferta && product.estado !== 'Agotado'" class="absolute-top-right q-pa-sm">
-        <q-badge color="accent" text-color="white" label="Oferta" class="badge-oferta" />
+        <q-badge color="accent" text-color="dark" label="Oferta" class="badge-oferta" />
       </div>
       <div v-if="product.new" class="absolute-top-left q-pa-sm badge-new-wrap">
         <q-badge color="blue" text-color="white" label="NUEVO" class="badge-new" />
@@ -93,20 +93,24 @@ defineEmits<{
   height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
   overflow: hidden;
   transition:
     transform 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .product-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.12);
 }
 
 .product-card:hover .gold-border-top {
-  border-image: linear-gradient(90deg, #c98a3d, #d9a45c) 1;
+  border-image: linear-gradient(90deg, #d4af37, #e5c378) 1;
 }
 
 .card-info {
@@ -116,31 +120,31 @@ defineEmits<{
 }
 
 .card-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: #241A24;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #f5f5f3;
   line-height: 1.2;
 }
 
 .card-desc {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.75rem;
   line-height: 1.3;
   margin-top: 2px;
+  color: #a3a39e;
 }
 
 .card-price {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1rem;
   font-weight: 400;
-  color: #241A24;
+  color: #e5c378;
 }
 
 .card-status {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
   padding: 2px 6px;
@@ -153,9 +157,9 @@ defineEmits<{
 }
 
 .card-add {
-  border-color: #C98A3D;
-  color: #C98A3D;
-  font-family: 'Nunito Sans', sans-serif;
+  border-color: #c5a059;
+  color: #d4af37;
+  font-family: 'Manrope', sans-serif;
   font-weight: 500;
   font-size: 0.8rem;
 }
@@ -167,20 +171,20 @@ defineEmits<{
 }
 .old-price {
   text-decoration: line-through;
-  opacity: 0.45;
-  color: #dc2626;
+  opacity: 0.55;
+  color: #e57373;
   margin-right: 6px;
   font-size: 0.85em;
 }
 
 .sale-price {
   font-weight: 600;
-  color: #241A24;
+  color: #e5c378;
 }
 
 .badge-oferta,
 .badge-new {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   letter-spacing: 1px;
 }
 

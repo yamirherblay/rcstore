@@ -6,9 +6,9 @@
       :icon="opt.icon"
       round
       flat
-      :color="viewMode === opt.value ? 'secondary' : 'grey-6'"
-      :text-color="viewMode === opt.value ? 'white' : 'grey-8'"
-      :style="viewMode === opt.value ? 'background: var(--view-btn-bg, #C98A3D);' : ''"
+      :color="viewMode === opt.value ? 'primary' : 'grey-5'"
+      :text-color="viewMode === opt.value ? 'dark' : 'grey-4'"
+      :style="viewMode === opt.value ? 'background: var(--view-btn-bg, #D4AF37);' : ''"
       :aria-label="opt.tooltip"
       @click="$emit('update:viewMode', opt.value)"
     >

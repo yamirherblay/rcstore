@@ -1,25 +1,169 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --rc-gold: #d4af37;
+  --rc-gold-bright: #e5c378;
+  --rc-bronze: #c5a059;
+  --rc-surface: #1a1a1a;
+  --rc-surface-high: #222222;
+  --rc-canvas: #131313;
+  --rc-hairline: rgba(255, 255, 255, 0.08);
+  --rc-hairline-gold: rgba(212, 175, 55, 0.25);
+  --rc-text: #f5f5f3;
+  --rc-text-muted: #a3a39e;
+}
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  background: #FBF5EE;
-  color: #241A24;
+  font-family: 'Manrope', sans-serif;
+  background: #131313;
+  color: #e5e2e1;
+}
+
+/* ───── Tipografías y utilidades de color ───── */
+.font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-body {
+  font-family: 'Manrope', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.text-gold {
+  color: #d4af37;
+}
+
+.text-champagne {
+  color: #e5c378;
+}
+
+.text-bronze {
+  color: #c5a059;
+}
+
+.text-obsidian {
+  color: #121212;
+}
+
+.text-muted {
+  color: #a3a39e;
+}
+
+/* Eyebrow: etiqueta superior de sección (Outfit label sanitizado, mayúsculas) */
+.eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c5a059;
+}
+
+/* ───── Botones del sistema ───── */
+.gold-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #121212;
+  background: linear-gradient(135deg, #e5c378 0%, #d4af37 50%, #c5a059 100%);
+  border: none;
+  border-radius: 4px;
+  padding: 14px 32px;
+  min-height: 48px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.18);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.28);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+.ghost-gold {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d4af37;
+  background: transparent;
+  border: 1px solid #c5a059;
+  border-radius: 4px;
+  padding: 12px 24px;
+  min-height: 44px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(212, 175, 55, 0.08);
+  }
+}
+
+/* Fondo primario dorado: texto oscuro para contraste AA/AAA */
+.bg-primary {
+  color: #121212 !important;
+
+  .q-icon,
+  .q-btn__content,
+  .q-badge__label,
+  .q-toolbar__title {
+    color: inherit;
+  }
+}
+
+.ghost-gold,
+.gold-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ───── Hairlines y aura dorada ───── */
+.hairline-gold {
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.hairline-gold-top {
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.gold-aura {
+  box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.12);
 }
 
 .brass-rule {
-  height: 3px;
+  height: 1px;
   border: none;
   margin: 0;
-  background: linear-gradient(90deg, #D9B38C, #C98A3D, #D9B38C);
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.45), transparent);
 }
 
 .gold-border-top {
-  border-top: 2px solid;
-  border-image: linear-gradient(90deg, #D9B38C, #C98A3D) 1;
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.6)) 1;
   border-image-slice: 1;
   border-image-repeat: stretch;
 }
 
+/* ───── Reveal / scroll ───── */
 .section-reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -49,7 +193,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.06;
+    opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 300px 300px;

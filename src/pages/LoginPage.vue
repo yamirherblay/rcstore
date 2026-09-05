@@ -2,7 +2,7 @@
   <q-page class="login-page row justify-center items-center q-pa-md">
     <q-card flat bordered class="login-card q-pa-lg" style="max-width: 420px; width: 100%">
       <div class="login-accent"></div>
-      <q-img :src="logo" alt="Y4Y Yamira" class="q-pa-md" style="height: 160px; object-fit: contain" @click="goHome" />
+      <q-img :src="logo" alt="RCStore" class="q-pa-md" style="height: 160px; object-fit: contain" @click="goHome" />
       <q-card-section class="text-center">
         <div class="text-h6 q-mb-xs">Acceso de Administrador</div>
         <div class="text-caption text-grey-7">Ingrese sus credenciales para continuar</div>
@@ -16,6 +16,7 @@
             type="email"
             dense
             outlined
+            dark
             autocomplete="email"
             class="q-mb-md"
             :error="error && !email"
@@ -26,6 +27,7 @@
             label="Contraseña"
             dense
             outlined
+            dark
             autocomplete="current-password"
             :error="error && !password"
           >
@@ -37,14 +39,14 @@
               />
             </template>
           </q-input>
-          <q-checkbox v-model="rememberMe" label="Recordarme" dense class="q-mb-sm" />
+          <q-checkbox v-model="rememberMe" label="Recordarme" dense dark class="q-mb-sm" />
           <div v-if="errorMessage" class="text-negative text-caption q-mt-sm">
             {{ errorMessage }}
           </div>
 
           <div class="row justify-end q-gutter-sm q-mt-lg">
             <q-btn flat label="Cancelar" color="grey-7" no-caps @click="goHome" />
-            <q-btn color="primary" label="Entrar" type="submit" no-caps :loading="loading" />
+            <q-btn color="primary" text-color="dark" label="Entrar" type="submit" no-caps :loading="loading" />
           </div>
         </q-form>
 
@@ -64,7 +66,7 @@ import { useMeta } from 'quasar';
 import logo from 'src/assets/logo.png';
 
 useMeta({
-  title: 'Acceso | Y4Y Yamira',
+  title: 'Acceso | RCStore',
   meta: {
     robots: { name: 'robots', content: 'noindex, nofollow' },
   },
@@ -115,12 +117,15 @@ async function onSubmit() {
 <style scoped>
 .login-page {
   min-height: 70vh;
-  background: #FBF5EE;
+  background: #131313;
 }
 
 .login-card {
   position: relative;
   overflow: hidden;
+  background: #1a1a1a;
+  color: #e5e2e1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .login-accent {
@@ -128,7 +133,7 @@ async function onSubmit() {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #62045C, #C98A3D);
+  height: 3px;
+  background: linear-gradient(90deg, #d4af37, #e5c378, #c5a059);
 }
 </style>

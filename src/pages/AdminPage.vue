@@ -6,14 +6,14 @@
 
     <div class="row q-col-gutter-md q-mb-lg">
       <div class="col-12 col-sm-4">
-        <q-card class="stat-gauge" style="border-left: 4px solid #62045C;">
+        <q-card class="stat-gauge" style="border-left: 4px solid #D4AF37;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #62045C;">
-              <q-icon name="inventory_2" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(212, 175, 55, 0.15);">
+              <q-icon name="inventory_2" size="22px" color="#E5C378" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">TOTAL</div>
-              <div class="gauge-value" style="color: #62045C;">{{ totalProducts }}</div>
+              <div class="gauge-value" style="color: #E5C378;">{{ totalProducts }}</div>
             </div>
           </q-card-section>
         </q-card>
@@ -22,26 +22,26 @@
       <div class="col-12 col-sm-4">
         <q-card class="stat-gauge" style="border-left: 4px solid #1A936F;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #1A936F;">
-              <q-icon name="check_circle" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(26, 147, 111, 0.18);">
+              <q-icon name="check_circle" size="22px" color="#1A936F" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">DISPONIBLES</div>
-              <div class="gauge-value" style="color: #1A936F;">{{ availableCount }}</div>
+              <div class="gauge-value" style="color: #4BD9AC;">{{ availableCount }}</div>
             </div>
           </q-card-section>
         </q-card>
       </div>
 
       <div class="col-12 col-sm-4">
-        <q-card class="stat-gauge" style="border-left: 4px solid #C98A3D;">
+        <q-card class="stat-gauge" style="border-left: 4px solid #C5A059;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #C98A3D;">
-              <q-icon name="local_offer" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(197, 160, 89, 0.15);">
+              <q-icon name="local_offer" size="22px" color="#E5C378" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">EN OFERTA</div>
-              <div class="gauge-value" style="color: #C98A3D;">{{ offerCount }}</div>
+              <div class="gauge-value" style="color: #E5C378;">{{ offerCount }}</div>
             </div>
           </q-card-section>
         </q-card>
@@ -54,10 +54,10 @@
     <q-card class="products-card">
       <q-card-section class="row items-center q-col-gutter-sm q-py-sm">
         <div class="col-auto">
-          <q-btn color="primary" icon="add" label="Añadir" no-caps @click="openAdd" :disable="!negocioId" style="font-family: 'Nunito Sans', sans-serif;" />
+          <q-btn color="primary" text-color="dark" icon="add" label="Añadir" no-caps @click="openAdd" :disable="!negocioId" style="font-family: 'Manrope', sans-serif;" />
         </div>
         <div class="col-12 col-sm-4 q-ml-auto">
-          <q-input dense outlined v-model="filter" placeholder="Buscar productos..." clearable>
+          <q-input dense outlined dark v-model="filter" placeholder="Buscar productos..." clearable>
             <template #prepend>
               <q-icon name="search" />
             </template>
@@ -65,12 +65,13 @@
         </div>
       </q-card-section>
 
-      <q-separator />
+      <q-separator dark />
 
       <q-table
         :rows="filteredProducts"
         :columns="columns"
         flat
+        dark
         :header-cell-style="headerCellStyle"
         loading-label="Cargando productos..."
         row-key="id"
@@ -108,6 +109,7 @@
                 :model-value="props.row.estado === 'Disponible'"
                 color="green-7"
                 dense
+                dark
                 size="sm"
                 :disable="togglingId === props.row.id"
                 @update:model-value="confirmToggle(props.row)"
@@ -121,9 +123,10 @@
             <q-badge
               v-if="props.row.oferta"
               label="Oferta"
-              color="secondary"
+              color="primary"
+              text-color="dark"
               dense
-              style="font-family: 'Nunito Sans', sans-serif; font-weight: 500; padding: 2px 8px;"
+              style="font-family: 'Manrope', sans-serif; font-weight: 500; padding: 2px 8px;"
             />
           </q-td>
         </template>
@@ -131,9 +134,9 @@
     </q-card>
 
     <q-dialog v-model="viewDialog">
-      <q-card style="max-width: 500px; width: 100%;">
-        <q-card-section class="row items-center q-py-sm" style="border-bottom: 2px solid #C98A3D;">
-          <div class="text-subtitle1 text-weight-bold" style="font-family: 'Nunito Sans', sans-serif; color: #62045C;">{{ viewProduct?.name }}</div>
+      <q-card style="max-width: 500px; width: 100%; background: #222; color: #e5e2e1; border: 1px solid rgba(212,175,55,.15);">
+        <q-card-section class="row items-center q-py-sm" style="border-bottom: 1px solid rgba(212,175,55,.35);">
+          <div class="text-subtitle1 text-weight-bold font-display" style="color: #f5f5f3;">{{ viewProduct?.name }}</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
@@ -144,30 +147,31 @@
             </div>
             <div class="col-8">
               <div class="q-mb-xs">
-                <span class="text-caption text-grey-7">ID</span>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #1A1A1A;">{{ viewProduct?.id }}</div>
+                <span class="text-caption text-muted">ID</span>
+                <div class="font-mono" style="font-size: 0.8rem; color: #a3a39e;">{{ viewProduct?.id }}</div>
               </div>
               <div class="q-mb-xs">
-                <span class="text-caption text-grey-7">Precio</span>
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #62045C; font-weight: 600;">{{ formatPrice(viewProduct?.price, viewProduct?.currency) }}</div>
+                <span class="text-caption text-muted">Precio</span>
+                <div class="font-mono" style="font-size: 0.95rem; color: #e5c378; font-weight: 600;">{{ formatPrice(viewProduct?.price, viewProduct?.currency) }}</div>
               </div>
               <div class="q-mb-xs">
-                <span class="text-caption text-grey-7">Categoría</span>
+                <span class="text-caption text-muted">Categoría</span>
                 <div class="text-body2">{{ viewProduct?.category }}</div>
               </div>
               <div class="q-mb-xs">
-                <span class="text-caption text-grey-7">Estado</span>
+                <span class="text-caption text-muted">Estado</span>
                 <div>
                   <q-badge
                     :label="viewProduct?.estado"
                     :color="viewProduct?.estado === 'Disponible' ? 'green-7' : 'red-5'"
+                    text-color="dark"
                     dense
                   />
                 </div>
               </div>
               <div v-if="viewProduct?.descripcion" class="q-mt-sm">
-                <span class="text-caption text-grey-7">Descripción</span>
-                <div class="text-body2 text-grey-8">{{ viewProduct?.descripcion }}</div>
+                <span class="text-caption text-muted">Descripción</span>
+                <div class="text-body2 text-muted">{{ viewProduct?.descripcion }}</div>
               </div>
             </div>
           </div>
@@ -176,9 +180,9 @@
     </q-dialog>
 
     <q-dialog v-model="addDialog" persistent>
-      <q-card style="max-width: 700px; width: 100%;">
-        <q-card-section class="row items-center q-py-sm" style="border-bottom: 2px solid #C98A3D;">
-          <div class="text-subtitle1 text-weight-bold" style="font-family: 'Nunito Sans', sans-serif; color: #62045C;">Nuevo producto</div>
+      <q-card style="max-width: 700px; width: 100%; background: #222; color: #e5e2e1; border: 1px solid rgba(212,175,55,.15);">
+        <q-card-section class="row items-center q-py-sm" style="border-bottom: 1px solid rgba(212,175,55,.35);">
+          <div class="text-subtitle1 text-weight-bold font-display" style="color: #f5f5f3;">Nuevo producto</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
@@ -195,9 +199,9 @@
     </q-dialog>
 
     <q-dialog v-model="editDialog" persistent>
-      <q-card style="max-width: 700px; width: 100%;">
-        <q-card-section class="row items-center q-py-sm" style="border-bottom: 2px solid #C98A3D;">
-          <div class="text-subtitle1 text-weight-bold" style="font-family: 'Nunito Sans', sans-serif; color: #62045C;">Editar producto</div>
+      <q-card style="max-width: 700px; width: 100%; background: #222; color: #e5e2e1; border: 1px solid rgba(212,175,55,.15);">
+        <q-card-section class="row items-center q-py-sm" style="border-bottom: 1px solid rgba(212,175,55,.35);">
+          <div class="text-subtitle1 text-weight-bold font-display" style="color: #f5f5f3;">Editar producto</div>
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
@@ -221,7 +225,7 @@ import type { QTableColumn } from 'quasar';
 import { useMeta, useQuasar } from 'quasar';
 
 useMeta({
-  title: 'Admin | Y4Y Yamira',
+  title: `Admin | ${branding.name}`,
   meta: {
     robots: { name: 'robots', content: 'noindex, nofollow' },
   },
@@ -232,6 +236,7 @@ import { useAdminChangesStore } from 'src/stores/adminChanges';
 import { useProducts } from 'src/composables/useProducts';
 import { supabase } from 'boot/supabase';
 import { getAdminBusinessId } from 'src/config/business';
+import { branding } from 'src/config/branding';
 import type { Product } from 'src/stores/types';
 import { formatPrice as _formatPrice } from 'src/utils/format';
 
@@ -279,12 +284,12 @@ const editProduct = ref<Product>({
 const originalEditId = ref<string | null>(null);
 
 const headerCellStyle = () => ({
-  background: '#62045C',
-  color: '#FFFFFF',
-  fontFamily: 'Nunito Sans, sans-serif',
+  background: '#1F1F1F',
+  color: '#E5C378',
+  fontFamily: 'Outfit, sans-serif',
   fontWeight: 600,
   fontSize: '0.75rem',
-  letterSpacing: '0.5px',
+  letterSpacing: '0.08em',
   textTransform: 'uppercase' as const,
 });
 
@@ -484,32 +489,34 @@ onMounted(async () => {
 
 <style lang="scss">
 .admin-page {
-  background: #FBF5EE;
+  background: #131313;
   min-height: 100vh;
 }
 
 /* Section headers */
 .section-eyebrow {
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9CA3AF;
+  color: #c5a059;
   margin-bottom: 2px;
 }
 
 .section-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.5rem;
-  letter-spacing: 3px;
-  color: #241A24;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #f5f5f3;
   line-height: 1.1;
 }
 
 .section-rule {
   height: 1px;
-  background: linear-gradient(90deg, #C98A3D 60px, #D9B38C 60px);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.6) 60px, rgba(212, 175, 55, 0.15) 60px);
   margin: 12px 0 24px 0;
   width: 100%;
 }
@@ -517,12 +524,16 @@ onMounted(async () => {
 /* Stat gauges */
 .stat-gauge {
   border-radius: 4px;
-  background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
-  transition: box-shadow 0.2s ease;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.12);
   }
 
   .gauge-icon {
@@ -536,12 +547,12 @@ onMounted(async () => {
   }
 
   .gauge-label {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6B7280;
+    color: #a3a39e;
   }
 
   .gauge-value {
@@ -555,8 +566,8 @@ onMounted(async () => {
 /* Products card */
 .products-card {
   border-radius: 4px;
-  background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
@@ -565,20 +576,29 @@ onMounted(async () => {
   thead tr {
     th {
       // header background/color set via header-cell-style prop
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     }
   }
 
   tbody tr {
-    background: #FFFFFF;
+    background: #1a1a1a;
+    color: #e5e2e1;
 
     &:nth-child(even) {
-      background: #FBF5EE;
+      background: #161616;
     }
 
     &:hover {
-      background: #F5EDE2;
+      background: rgba(212, 175, 55, 0.08);
     }
+  }
+
+  &.q-table--dark tbody td:before {
+    background: rgba(212, 175, 55, 0.1);
+  }
+
+  &.q-table--dark tbody tr.selected td:after {
+    background: rgba(212, 175, 55, 0.16);
   }
 
   .q-table__middle {
@@ -586,8 +606,9 @@ onMounted(async () => {
   }
 
   td {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 0.85rem;
+    color: #e5e2e1;
   }
 }
 </style>

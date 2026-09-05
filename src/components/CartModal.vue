@@ -6,20 +6,20 @@
     :maximized="$q.screen.lt.md"
     :persistent="$q.screen.lt.md"
   >
-    <q-card :style="$q.screen.lt.md ? '' : 'min-width: 400px; max-width: 640px; width: 100%'">
+    <q-card :style="$q.screen.lt.md ? '' : 'min-width: 400px; max-width: 640px; width: 100%'" class="cart-modal-card">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6 text-weight-bold">Tu carrito</div>
         <q-space />
         <q-btn icon="close" flat round dense v-close-popup />
       </q-card-section>
 
-      <q-separator class="bg-grey-3" />
+      <q-separator class="bg-white-10" />
 
       <q-card-section>
-        <div v-if="!cart.items.length" class="text-grey-6 text-center q-py-lg">
+        <div v-if="!cart.items.length" class="text-muted text-center q-py-lg">
           Tu carrito está vacío.
           <br>
-          <q-btn flat color="secondary" label="Ver catálogo" to="/catalogo" class="q-mt-sm" @click="close" />
+          <q-btn flat color="primary" label="Ver catálogo" to="/catalogo" class="q-mt-sm" @click="close" />
         </div>
         <q-list v-else separator>
           <q-item v-for="it in cart.items" :key="it.product.id">
@@ -31,7 +31,7 @@
             </q-item-section>
             <q-item-section>
               <q-item-label class="text-weight-bold">{{ it.product.name }}</q-item-label>
-              <q-item-label caption class="text-grey-7">
+              <q-item-label caption class="text-grey-6">
                 <template v-if="it.product.oferta">
                   {{ formatPrice(it.product.descuento, it.product.currency) }}
                   <span class="offer-tag">(Oferta)</span>
@@ -64,7 +64,7 @@
       </q-card-section>
 
       <template v-if="cart.items.length">
-        <q-separator class="bg-grey-3" />
+        <q-separator class="bg-white-10" />
 
         <q-card-section class="q-py-md">
           <div class="row items-center q-mb-sm">
@@ -72,7 +72,7 @@
             <q-space />
             <q-btn
               v-if="hasSavedAddress && method === 'domicilio'"
-              flat dense size="sm" color="dark" no-caps
+              flat dense size="sm" color="white" no-caps
               icon="delete_outline"
               label="Olvidar dirección"
               class="olvidar-btn"
@@ -83,7 +83,8 @@
           <q-btn-toggle
             v-model="method"
             :options="methodOptions"
-            color="secondary"
+            color="primary"
+            text-color="dark"
             spread
             no-caps
           />
@@ -94,6 +95,7 @@
                 v-model="draftName"
                 label="Nombre (opcional)"
                 outlined
+                dark
                 class="q-mt-sm"
                 autocomplete="name"
                 @blur="saveDelivery"
@@ -102,6 +104,7 @@
                 v-model="draftAddress"
                 label="Dirección de entrega"
                 outlined
+                dark
                 type="textarea"
                 autogrow
                 class="q-mt-sm"
@@ -114,6 +117,7 @@
                 v-model="draftRefs"
                 label="Puntos de referencia (opcional)"
                 outlined
+                dark
                 type="textarea"
                 autogrow
                 class="q-mt-sm"
@@ -125,14 +129,14 @@
           </q-slide-transition>
         </q-card-section>
 
-        <q-separator class="bg-grey-3" />
+        <q-separator class="bg-white-10" />
 
         <q-card-section class="row items-center justify-between q-gutter-sm">
           <div class="q-gutter-xs">
             <div
               v-for="(total, currency) in cart.totalByCurrency"
               :key="currency"
-              class="text-subtitle1 text-weight-bold"
+              class="text-subtitle1 text-weight-bold font-mono"
             >
               Total {{ currency }}: {{ formatPrice(total, currency) }}
             </div>
@@ -140,6 +144,7 @@
           <div class="row q-gutter-sm">
             <q-btn
               color="positive"
+              text-color="dark"
               icon="fa-brands fa-whatsapp"
               :disable="!canSend || sending"
               :loading="sending"
@@ -149,7 +154,7 @@
               Pedir por WhatsApp
             </q-btn>
             <q-btn
-              color="dark"
+              color="white"
               outline
               icon="delete_sweep"
               :disable="!cart.items.length"
@@ -342,6 +347,12 @@ function close() {
 </script>
 
 <style scoped>
+.cart-modal-card {
+  background: #222;
+  color: #e5e2e1;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
 .offer-tag {
   font-size: 0.65rem;
   font-weight: 600;

@@ -15,8 +15,8 @@
         >
           <q-chip
             clickable
-            :color="selectedCategory === cat.key ? 'secondary' : 'grey-3'"
-            :text-color="selectedCategory === cat.key ? 'white' : 'dark'"
+            :color="selectedCategory === cat.key ? 'primary' : 'grey-9'"
+            :text-color="selectedCategory === cat.key ? 'dark' : 'grey-4'"
             class="q-px-md text-weight-medium"
             @click="onSelect(cat.key)"
           >
@@ -79,8 +79,8 @@ const barStyle = {
 .cat-scroll {
   height: 52px;
   padding: 0 4px;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cat-scroll::-webkit-scrollbar {
@@ -112,7 +112,7 @@ const barStyle = {
   right: 8px;
   height: 3px;
   border-radius: 3px;
-  background: #C98A3D;
+  background: #e5c378;
 }
 
 .cat-fade {
@@ -122,6 +122,6 @@ const barStyle = {
   height: 100%;
   width: 44px;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  background: linear-gradient(90deg, rgba(21, 21, 21, 0), rgba(21, 21, 21, 1));
 }
 </style>

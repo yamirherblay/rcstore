@@ -6,28 +6,28 @@
 
     <div class="row q-col-gutter-md q-mb-lg">
       <div class="col-12 col-sm-4">
-        <q-card class="stat-gauge" style="border-left: 4px solid #62045C;">
+        <q-card class="stat-gauge" style="border-left: 4px solid #D4AF37;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #62045C;">
-              <q-icon name="receipt_long" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(212, 175, 55, 0.15);">
+              <q-icon name="receipt_long" size="22px" color="#E5C378" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">TOTAL PEDIDOS</div>
-              <div class="gauge-value" style="color: #62045C;">{{ ordersStore.stats.total }}</div>
+              <div class="gauge-value" style="color: #E5C378;">{{ ordersStore.stats.total }}</div>
             </div>
           </q-card-section>
         </q-card>
       </div>
 
       <div class="col-12 col-sm-4">
-        <q-card class="stat-gauge" style="border-left: 4px solid #C98A3D;">
+        <q-card class="stat-gauge" style="border-left: 4px solid #C5A059;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #C98A3D;">
-              <q-icon name="schedule" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(197, 160, 89, 0.15);">
+              <q-icon name="schedule" size="22px" color="#E5C378" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">PENDIENTES</div>
-              <div class="gauge-value" style="color: #C98A3D;">{{ ordersStore.stats.pendientes }}</div>
+              <div class="gauge-value" style="color: #E5C378;">{{ ordersStore.stats.pendientes }}</div>
             </div>
           </q-card-section>
         </q-card>
@@ -36,12 +36,12 @@
       <div class="col-12 col-sm-4">
         <q-card class="stat-gauge" style="border-left: 4px solid #1A936F;">
           <q-card-section class="row items-center no-wrap q-py-md">
-            <div class="gauge-icon" style="background: #1A936F;">
-              <q-icon name="check_circle" size="22px" color="white" />
+            <div class="gauge-icon" style="background: rgba(26, 147, 111, 0.18);">
+              <q-icon name="check_circle" size="22px" color="#1A936F" />
             </div>
             <div class="q-ml-md">
               <div class="gauge-label">ENTREGADOS</div>
-              <div class="gauge-value" style="color: #1A936F;">{{ ordersStore.stats.entregados }}</div>
+              <div class="gauge-value" style="color: #4BD9AC;">{{ ordersStore.stats.entregados }}</div>
             </div>
           </q-card-section>
         </q-card>
@@ -52,16 +52,17 @@
       <div class="col-auto">
         <q-btn
           color="primary"
+          text-color="dark"
           icon="refresh"
           label="Refrescar"
           no-caps
           :loading="ordersStore.loading"
           @click="refresh"
-          style="font-family: 'Nunito Sans', sans-serif;"
+          style="font-family: 'Manrope', sans-serif;"
         />
       </div>
       <div class="col-12 col-sm-4 q-ml-auto">
-        <q-input dense outlined v-model="filter" placeholder="Buscar por token o cliente..." clearable>
+        <q-input dense outlined dark v-model="filter" placeholder="Buscar por token o cliente..." clearable>
           <template #prepend>
             <q-icon name="search" />
           </template>
@@ -69,11 +70,11 @@
       </div>
     </div>
 
-    <div v-if="ordersStore.loading && !ordersStore.orders.length" class="text-grey-6 text-center q-py-xl">
+    <div v-if="ordersStore.loading && !ordersStore.orders.length" class="text-muted text-center q-py-xl">
       Cargando pedidos...
     </div>
 
-    <div v-else-if="!filteredOrders.length" class="text-grey-6 text-center q-py-xl">
+    <div v-else-if="!filteredOrders.length" class="text-muted text-center q-py-xl">
       No hay pedidos todavía.
     </div>
 
@@ -88,32 +89,32 @@
         <div class="col">
           <div class="row items-center q-gutter-sm">
             <span class="order-token">#{{ order.token.slice(0, 6) }}</span>
-            <q-badge :label="order.status" :color="statusColor(order.status)" dense />
+            <q-badge :label="order.status" :color="statusColor(order.status)" :text-color="statusTextColor()" dense />
           </div>
-          <div class="text-caption text-black-6 q-mt-xs">{{ formatDate(order.created_at) }}</div>
+          <div class="text-caption text-muted q-mt-xs">{{ formatDate(order.created_at) }}</div>
         </div>
         <q-icon name="chevron_right" class="text-grey-5" />
       </q-card-section>
 
-      <q-separator />
+      <q-separator dark />
 
       <q-card-section class="q-py-sm">
         <div class="row items-center q-col-gutter-sm">
           <div class="col-12 col-sm-6">
             <div class="row items-center no-wrap q-gutter-sm">
-              <q-icon name="local_shipping" size="16px" class="text-grey-9" />
+              <q-icon name="local_shipping" size="16px" class="text-grey-5" />
               <span class="text-body2">{{ deliveryLabel(order.type_delivery) }}</span>
             </div>
             <div class="row items-center no-wrap q-gutter-sm q-mt-xs">
               <q-icon name="person" size="16px" class="text-blue-8" />
-              <span class="text-body2 text-grey-8">{{ order.client_name || 'Cliente sin identificar' }}</span>
+              <span class="text-body2 text-muted">{{ order.client_name || 'Cliente sin identificar' }}</span>
             </div>
           </div>
           <div class="col-12 col-sm-6 text-right">
-            <div class="text-subtitle1 text-weight-bold" style="color: #62045C;">
+            <div class="text-subtitle1 text-weight-bold font-mono" style="color: #E5C378;">
               {{ formatPrice(order.total_cup, 'CUP') }}
             </div>
-            <div v-if="order.total_usd" class="text-subtitle1 text-weight-bold"  style="color: #62045C;">
+            <div v-if="order.total_usd" class="text-subtitle1 text-weight-bold font-mono"  style="color: #E5C378;">
               {{ formatPrice(order.total_usd, 'USD') }}
             </div>
           </div>
@@ -127,9 +128,9 @@
       :full-width="$q.screen.lt.md"
       :maximized="$q.screen.lt.md"
     >
-      <q-card :style="$q.screen.lt.md ? '' : 'max-width: 560px; width: 100%'">
-        <q-card-section class="row items-center q-py-sm" style="border-bottom: 2px solid #C98A3D;">
-          <div class="text-subtitle1 text-weight-bold" style="font-family: 'Nunito Sans', sans-serif; color: #62045C;">
+      <q-card :style="$q.screen.lt.md ? '' : 'max-width: 560px; width: 100%'" class="order-detail-card">
+        <q-card-section class="row items-center q-py-sm" style="border-bottom: 1px solid rgba(212,175,55,.35);">
+          <div class="text-subtitle1 text-weight-bold font-display" style="color: #f5f5f3;">
             Pedido #{{ detailOrder?.token.slice(0,6) ?? '' }}
           </div>
           <q-space />
@@ -138,7 +139,7 @@
 
         <q-card-section v-if="detailOrder" class="q-pt-md">
           <div class="q-mb-sm">
-            <span class="text-caption text-grey-7">Token (para match exacto)</span>
+            <span class="text-caption text-muted">Token (para match exacto)</span>
             <div class="row items-center no-wrap q-gutter-xs">
               <div class="order-token-mono">{{ detailOrder.token }}</div>
               <q-btn flat dense round size="sm" icon="content_copy" color="primary" @click="copyToken(detailOrder.token)">
@@ -148,35 +149,35 @@
           </div>
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-6">
-              <span class="text-caption text-grey-7">Fecha</span>
+              <span class="text-caption text-muted">Fecha</span>
               <div class="text-body2">{{ formatDate(detailOrder.created_at) }}</div>
             </div>
             <div class="col-6">
-              <span class="text-caption text-grey-7">Estado</span>
+              <span class="text-caption text-muted">Estado</span>
               <div>
-                <q-badge :label="detailOrder.status" :color="statusColor(detailOrder.status)" dense />
+                <q-badge :label="detailOrder.status" :color="statusColor(detailOrder.status)" :text-color="statusTextColor()" dense />
               </div>
             </div>
             <div class="col-6">
-              <span class="text-caption text-grey-7">Tipo de envío</span>
+              <span class="text-caption text-muted">Tipo de envío</span>
               <div class="text-body2">{{ deliveryLabel(detailOrder.type_delivery) }}</div>
             </div>
             <div class="col-6">
-              <span class="text-caption text-grey-7">Cliente</span>
+              <span class="text-caption text-muted">Cliente</span>
               <div class="text-body2">{{ detailOrder.client_name || '—' }}</div>
             </div>
             <div v-if="detailOrder.type_delivery === 'domicilio'" class="col-12">
-              <span class="text-caption text-grey-7">Dirección</span>
+              <span class="text-caption text-muted">Dirección</span>
               <div class="text-body2">{{ detailOrder.address_client || '—' }}</div>
             </div>
           </div>
 
-          <div class="text-caption text-grey-7 q-mb-xs">Productos</div>
-          <q-list bordered separator class="rounded-borders q-mb-md">
+          <div class="text-caption text-muted q-mb-xs">Productos</div>
+          <q-list bordered separator dark class="rounded-borders q-mb-md">
             <q-item v-for="item in detailItems" :key="item.id">
               <q-item-section>
                 <q-item-label class="text-weight-medium">{{ item.products?.name || item.id_product }}</q-item-label>
-                <q-item-label caption class="text-grey-7">
+                <q-item-label caption class="text-muted">
                   {{ item.qty }} × {{ formatPrice(item.price_at_order, item.products?.currency) }}
                 </q-item-label>
               </q-item-section>
@@ -189,15 +190,15 @@
           </q-list>
 
           <div class="row items-center justify-end q-gutter-sm q-mb-md">
-            <div v-if="detailOrder.total_usd" class="text-body1 text-weight-bold">
+            <div v-if="detailOrder.total_usd" class="text-body1 text-weight-bold font-mono">
               Total USD: {{ formatPrice(detailOrder.total_usd, 'USD') }}
             </div>
-            <div class="text-subtitle1 text-weight-bold" style="color: #62045C;">
+            <div class="text-subtitle1 text-weight-bold font-mono" style="color: #E5C378;">
               Total CUP: {{ formatPrice(detailOrder.total_cup, 'CUP') }}
             </div>
           </div>
 
-          <q-separator class="q-mb-md" />
+          <q-separator dark class="q-mb-md" />
 
           <div class="row items-center q-col-gutter-sm">
             <div class="col-12 col-sm-7">
@@ -206,19 +207,21 @@
                 :options="statusOptions"
                 outlined
                 dense
+                dark
                 label="Cambiar estado"
                 :loading="savingStatus"
               />
             </div>
             <div class="col-12 col-sm-5">
               <q-btn
-                color="secondary"
+                color="primary"
+                text-color="dark"
                 label="Guardar estado"
                 no-caps
                 class="full-width"
                 :disable="!statusDraft || statusDraft === detailOrder.status || savingStatus || detailOrder.status === 'Entregado' || detailOrder.status === 'Cancelado'"
                 @click="saveStatus"
-                style="font-family: 'Nunito Sans', sans-serif;"
+                style="font-family: 'Manrope', sans-serif;"
               />
             </div>
           </div>
@@ -232,11 +235,12 @@
 import { computed, onMounted, ref } from 'vue';
 import { useMeta, useQuasar, copyToClipboard } from 'quasar';
 import { useOrdersStore } from 'src/stores/orders';
+import { branding } from 'src/config/branding';
 import type { Order, OrderProductRow, OrderStatus } from 'src/stores/types';
 import { formatPrice as formatPriceUtil } from 'src/utils/format';
 
 useMeta({
-  title: 'Pedidos | Admin Y4Y',
+  title: `Pedidos | Admin ${branding.name}`,
   meta: {
     robots: { name: 'robots', content: 'noindex, nofollow' },
   },
@@ -305,6 +309,10 @@ function statusColor(status: OrderStatus): string {
   return 'grey-6';
 }
 
+function statusTextColor(): string {
+  return 'dark';
+}
+
 function formatPrice(val?: number | null, currency?: string | null): string {
   if (val == null) return '-';
   return formatPriceUtil(val, currency);
@@ -356,39 +364,49 @@ onMounted(() => {
 
 <style lang="scss">
 .admin-page {
-  background: #FBF5EE;
+  background: #131313;
   min-height: 100vh;
 }
 
 .section-eyebrow {
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9CA3AF;
+  color: #c5a059;
   margin-bottom: 2px;
 }
 
 .section-title {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.5rem;
-  letter-spacing: 3px;
-  color: #241A24;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #f5f5f3;
   line-height: 1.1;
 }
 
 .section-rule {
   height: 1px;
-  background: linear-gradient(90deg, #C98A3D 60px, #D9B38C 60px);
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.6) 60px, rgba(212, 175, 55, 0.15) 60px);
   margin: 12px 0 24px 0;
   width: 100%;
 }
 
 .stat-gauge {
   border-radius: 4px;
-  background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.12);
+  }
 
   .gauge-icon {
     width: 44px;
@@ -401,12 +419,12 @@ onMounted(() => {
   }
 
   .gauge-label {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6B7280;
+    color: #a3a39e;
   }
 
   .gauge-value {
@@ -419,21 +437,36 @@ onMounted(() => {
 
 .order-card {
   border-radius: 4px;
-  background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e5e2e1;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    transform: translateY(-1px);
+  }
 }
 
 .order-token {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #62045C;
+  color: #e5c378;
 }
 
 .order-token-mono {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.75rem;
-  color: #6B7280;
+  color: #a3a39e;
   word-break: break-all;
+}
+
+.order-detail-card {
+  background: #222;
+  color: #e5e2e1;
+  border: 1px solid rgba(212, 175, 55, 0.15);
 }
 </style>
