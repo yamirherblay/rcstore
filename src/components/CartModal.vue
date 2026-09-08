@@ -83,13 +83,14 @@
           <q-btn-toggle
             v-model="method"
             :options="methodOptions"
-            color="primary"
-            text-color="dark"
+            :color="method === 'domicilio' ? 'accent' : 'primary'"
+            :text-color="method === 'domicilio' ? 'dark' : 'white'"
             spread
             no-caps
-          />
+          >
+    </q-btn-toggle>
 
-          <q-slide-transition>
+               <q-slide-transition>
             <div v-show="method === 'domicilio'">
               <q-input
                 v-model="draftName"
@@ -367,5 +368,10 @@ function close() {
 .olvidar-btn {
   min-height: 36px;
   text-emphasis-color: #E8543F;
+}
+.custom-toggle :deep(.q-btn--active)::after {
+  content: '✓';
+  margin-left: 8px;
+  font-weight: bold;
 }
 </style>

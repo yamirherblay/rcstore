@@ -34,7 +34,7 @@
             </template>
           </div>
           <q-badge
-            :color="product.estado === 'Disponible' ? 'info' : 'negative'"
+            :color="product.estado === 'Disponible' ? 'green' : 'negative'"
             :text-color="product.estado === 'Disponible' ? 'dark' : 'white'"
             :label="product.estado"
             class="list-status"
@@ -57,7 +57,6 @@
             icon="shopping_cart"
             size="sm"
             color="primary"
-            text-color="dark"
             :disable="product.estado === 'Agotado'"
             @click="$emit('add-to-cart', product)"
           />

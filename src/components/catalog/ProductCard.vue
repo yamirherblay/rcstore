@@ -32,8 +32,8 @@
           </template>
         </div>
         <q-badge
-          :color="product.estado === 'Disponible' ? 'blue' : 'negative'"
-          :text-color="'white'"
+          :color="product.estado === 'Disponible' ? 'green' : 'negative'"
+            :text-color="product.estado === 'Disponible' ? 'dark' : 'white'"
           :label="product.estado"
           class="card-status"
         />

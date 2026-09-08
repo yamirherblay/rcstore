@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-btn flat dense round icon="notifications" @click="openNotificationMenu">
-      <q-badge v-if="count > 0" color="green" text-color="dark" floating>{{ count }}</q-badge>
+      <q-badge v-if="count > 0" color="green" text-color="dark" dark="true" floating>{{ count }}</q-badge>
     </q-btn>
     <q-menu v-model="menuOpen" class="rc-notif-menu" :context-menu="false" anchor="bottom right" self="top right">
       <q-list style="min-width: 260px; max-height: 60vh" separator>
@@ -26,7 +26,7 @@
               <span v-else>Eliminado</span>:
               <strong>{{ c.productName }}</strong>
             </div>
-            <div class="text-caption text-grey-7">{{ formatTime(c.at) }}</div>
+            <div class="text-caption text-muted">{{ formatTime(c.at) }}</div>
           </q-item-section>
         </q-item>
       </q-list>
@@ -50,7 +50,7 @@ function iconFor(type: ChangeType): string {
 function colorFor(type: ChangeType): string {
   if (type === 'add') return 'positive';
   if (type === 'update') return 'info';
-  return 'negative';
+  return 'red-4';
 }
 function formatTime(ts: number): string {
   try {
