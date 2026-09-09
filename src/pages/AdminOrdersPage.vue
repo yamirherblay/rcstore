@@ -220,7 +220,7 @@
           <q-separator dark class="q-mb-md" />
 
           <div class="row items-center q-col-gutter-sm">
-            <div class="col-12 col-sm-7"  v-if="detailOrder.status !== 'Entregado'">
+            <div class="col-12 col-sm-7"  v-if="detailOrder.status !== 'Entregado' && detailOrder.status !== 'Cancelado'">
               <q-select
                 v-model="statusDraft"
                 :options="statusOptions"
