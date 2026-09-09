@@ -70,6 +70,30 @@
       </div>
     </div>
 
+    <q-tabs
+      v-model="statusFilter"
+      dense
+      align="left"
+      inline-label
+      class="admin-tabs q-mb-md"
+    >
+      <q-tab
+        v-for="opt in statusFilterOptions"
+        :key="opt.value"
+        :name="opt.value"
+        class="admin-tab"
+      >
+        <span class="tab-label">{{ opt.label }}</span>
+        <q-badge
+          :class="['tab-count', statusFilter === opt.value ? `is-${opt.badge}` : 'is-muted']"
+          rounded
+          floating
+        >
+          {{ countByStatus(opt.value) }}
+        </q-badge>
+      </q-tab>
+    </q-tabs>
+
     <div v-if="ordersStore.loading && !ordersStore.orders.length" class="text-muted text-center q-py-xl">
       Cargando pedidos...
     </div>
@@ -78,49 +102,44 @@
       No hay pedidos todavía.
     </div>
 
-    <q-card
-      v-for="order in filteredOrders"
-      :key="order.id"
-      class="order-card q-mb-sm"
-      clickable
-      @click="openDetail(order)"
+    <q-table
+      v-else
+      :rows="filteredOrders"
+      :columns="columns"
+      row-key="id"
+      flat
+      dark
+      :pagination="pagination"
+      :rows-per-page-options="[10, 20, 50]"
+      class="order-table"
+      @row-click="(_evt, row) => openDetail(row)"
     >
-      <q-card-section class="row items-center q-py-sm">
-        <div class="col">
-          <div class="row items-center q-gutter-sm">
-            <span class="order-token">#{{ order.token.slice(0, 6) }}</span>
-            <q-badge :label="order.status" :color="statusColor(order.status)" :text-color="statusTextColor()" dense />
-          </div>
-          <div class="text-caption text-muted q-mt-xs">{{ formatDate(order.created_at) }}</div>
-        </div>
-        <q-icon name="chevron_right" class="text-grey-5" />
-      </q-card-section>
+      <template #body-cell-token="props">
+        <q-td :props="props">
+          <span class="order-token">#{{ props.row.token.slice(0, 6) }}</span>
+        </q-td>
+      </template>
 
-      <q-separator dark />
+      <template #body-cell-cliente="props">
+        <q-td :props="props">
+          {{ props.row.client_name || '—' }}
+        </q-td>
+      </template>
 
-      <q-card-section class="q-py-sm">
-        <div class="row items-center q-col-gutter-sm">
-          <div class="col-12 col-sm-6">
-            <div class="row items-center no-wrap q-gutter-sm">
-              <q-icon name="local_shipping" size="16px" class="text-grey-5" />
-              <span class="text-body2">{{ deliveryLabel(order.type_delivery) }}</span>
-            </div>
-            <div class="row items-center no-wrap q-gutter-sm q-mt-xs">
-              <q-icon name="person" size="16px" class="text-blue-8" />
-              <span class="text-body2 text-muted">{{ order.client_name || 'Cliente sin identificar' }}</span>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 text-right">
-            <div class="text-subtitle1 text-weight-bold font-mono" style="color: #E5C378;">
-              {{ formatPrice(order.total_cup, 'CUP') }}
-            </div>
-            <div v-if="order.total_usd" class="text-subtitle1 text-weight-bold font-mono"  style="color: #E5C378;">
-              {{ formatPrice(order.total_usd, 'USD') }}
-            </div>
-          </div>
-        </div>
-      </q-card-section>
-    </q-card>
+      <template #body-cell-subtotal="props">
+        <q-td :props="props">
+          <div class="font-mono" style="color: #E5C378;">{{ rowSubtotal(props.row) }}</div>
+        </q-td>
+      </template>
+
+      <template #body-cell-acciones="props">
+        <q-td :props="props">
+          <q-btn flat dense round icon="visibility" color="primary" @click.stop="openDetail(props.row)">
+            <q-tooltip>Ver detalles</q-tooltip>
+          </q-btn>
+        </q-td>
+      </template>
+    </q-table>
 
     <q-dialog
       v-model="detailOpen"
@@ -201,7 +220,7 @@
           <q-separator dark class="q-mb-md" />
 
           <div class="row items-center q-col-gutter-sm">
-            <div class="col-12 col-sm-7">
+            <div class="col-12 col-sm-7"  v-if="detailOrder.status !== 'Entregado'">
               <q-select
                 v-model="statusDraft"
                 :options="statusOptions"
@@ -249,6 +268,7 @@ useMeta({
 const ordersStore = useOrdersStore();
 const $q = useQuasar();
 const filter = ref('');
+const statusFilter = ref('todos');
 
 const detailOpen = ref(false);
 const detailOrder = ref<Order | null>(null);
@@ -257,16 +277,60 @@ const savingStatus = ref(false);
 
 const statusOptions: OrderStatus[] = ['Pendiente', 'Confirmado', 'Entregado', 'Cancelado'];
 
+const statusFilterOptions = [
+  { label: 'Todos', value: 'todos', badge: 'primary' },
+  { label: 'Pendiente', value: 'Pendiente', badge: 'orange' },
+  { label: 'Confirmado', value: 'Confirmado', badge: 'blue' },
+  { label: 'Entregado', value: 'Entregado', badge: 'green' },
+  { label: 'Cancelado', value: 'Cancelado', badge: 'grey' },
+];
+
+function countByStatus(value: string): number {
+  if (value === 'todos') return ordersStore.stats.total;
+  const key = `${
+    value === 'Pendiente'
+      ? 'pendientes'
+      : value === 'Confirmado'
+        ? 'confirmados'
+        : value === 'Entregado'
+          ? 'entregados'
+          : 'cancelados'
+  }` as keyof typeof ordersStore.stats;
+  return ordersStore.stats[key] ?? 0;
+}
+
+const columns = [
+  { name: 'token', label: 'Token', field: 'token', align: 'left' as const, sortable: true },
+  { name: 'cliente', label: 'Cliente', field: 'client_name', align: 'left' as const, sortable: true },
+  { name: 'subtotal', label: 'Subtotal', field: 'subtotal', align: 'right' as const },
+  { name: 'acciones', label: '', field: 'acciones', align: 'center' as const },
+];
+
+const pagination = ref({ rowsPerPage: 10, page: 1 });
+
 const filteredOrders = computed(() => {
+  let result = ordersStore.orders;
+  if (statusFilter.value !== 'todos') {
+    result = result.filter((o) => o.status === statusFilter.value);
+  }
   const f = filter.value.trim().toLowerCase();
-  if (!f) return ordersStore.orders;
-  return ordersStore.orders.filter(
-    (o) =>
-      o.token.toLowerCase().includes(f) ||
-      String(o.id).includes(f) ||
-      (o.client_name || '').toLowerCase().includes(f),
-  );
+  if (f) {
+    result = result.filter(
+      (o) =>
+        o.token.toLowerCase().includes(f) ||
+        String(o.id).includes(f) ||
+        (o.client_name || '').toLowerCase().includes(f),
+    );
+  }
+  return result;
 });
+
+function rowSubtotal(order: Order): string {
+  const parts: string[] = [];
+  if (order.total_cup) parts.push(formatPrice(order.total_cup, 'CUP'));
+  if (order.total_usd) parts.push(formatPrice(order.total_usd, 'USD'));
+  return parts.join(' / ') || '-';
+}
 
 const detailItems = computed<OrderProductRow[]>(() =>
   detailOrder.value ? ordersStore.productsByOrder(detailOrder.value.id) : [],
@@ -437,19 +501,105 @@ onMounted(() => {
   }
 }
 
-.order-card {
-  border-radius: 4px;
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #e5e2e1;
-  transition:
-    border-color 0.2s ease,
-    transform 0.2s ease;
+.order-table {
+  background: transparent;
 
-  &:hover {
-    border-color: rgba(212, 175, 55, 0.35);
-    transform: translateY(-1px);
+  th {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a3a39e;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
   }
+
+  td {
+    color: #e5e2e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  }
+
+  tbody tr:hover {
+    background: rgba(212, 175, 55, 0.06) !important;
+    cursor: pointer;
+  }
+}
+
+.admin-tabs {
+  .q-tab {
+    padding: 0 10px;
+    text-transform: none;
+    font-family: 'Manrope', sans-serif;
+    color: #a3a39e;
+    min-height: 40px;
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      color: #e5e2e1;
+    }
+
+    &.q-tab--active {
+      color: #f5f5f3;
+      font-weight: 600;
+    }
+
+    .q-tab__indicator {
+      height: 2px;
+    }
+
+    .q-tab__content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.tab-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0 7px;
+  border-radius: 999px;
+  line-height: 1.6;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab-count.is-muted {
+  background: rgba(255, 255, 255, 0.08);
+  color: #a3a39e;
+}
+
+.tab-count.is-primary {
+  background: rgba(212, 175, 55, 0.2);
+  color: #e5c378;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.tab-count.is-orange {
+  background: rgba(255, 167, 38, 0.18);
+  color: #ffa726;
+  border: 1px solid rgba(255, 167, 38, 0.4);
+}
+
+.tab-count.is-blue {
+  background: rgba(66, 165, 245, 0.18);
+  color: #42a5f5;
+  border: 1px solid rgba(66, 165, 245, 0.4);
+}
+
+.tab-count.is-green {
+  background: rgba(26, 147, 111, 0.2);
+  color: #4bd9ac;
+  border: 1px solid rgba(26, 147, 111, 0.45);
+}
+
+.tab-count.is-grey {
+  background: rgba(255, 255, 255, 0.08);
+  color: #bdbdbd;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .order-token {

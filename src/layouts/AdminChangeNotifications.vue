@@ -1,19 +1,19 @@
 <template>
   <div>
     <q-btn flat dense round icon="notifications" @click="openNotificationMenu">
-      <q-badge v-if="count > 0" color="green" text-color="dark" dark="true" floating>{{ count }}</q-badge>
+      <q-badge v-if="count > 0" color="green" text-color="dark" floating>{{ count }}</q-badge>
     </q-btn>
     <q-menu v-model="menuOpen" class="rc-notif-menu" :context-menu="false" anchor="bottom right" self="top right">
       <q-list style="min-width: 260px; max-height: 60vh" separator>
         <q-item>
-          <q-item-section class="text-subtitle2">Cambios recientes</q-item-section>
+          <q-item-section class="text-subtitle2 text-grey-8">Cambios recientes</q-item-section>
           <q-item-section side>
             <q-btn dense flat size="sm" icon="clear_all" @click="clear" :disable="count === 0" />
           </q-item-section>
         </q-item>
         <q-separator />
         <q-item v-if="count === 0">
-          <q-item-section class="text-muted">Sin cambios</q-item-section>
+          <q-item-section class="text-muted text-grey-9">Sin cambios</q-item-section>
         </q-item>
         <q-item v-for="(c, idx) in items" :key="c.at + '-' + idx">
           <q-item-section avatar>
@@ -26,7 +26,7 @@
               <span v-else>Eliminado</span>:
               <strong>{{ c.productName }}</strong>
             </div>
-            <div class="text-caption text-muted">{{ formatTime(c.at) }}</div>
+            <div class="text-caption text-grey-7">{{ formatTime(c.at) }}</div>
           </q-item-section>
         </q-item>
       </q-list>
@@ -50,7 +50,7 @@ function iconFor(type: ChangeType): string {
 function colorFor(type: ChangeType): string {
   if (type === 'add') return 'positive';
   if (type === 'update') return 'info';
-  return 'red-4';
+  return 'negative';
 }
 function formatTime(ts: number): string {
   try {
