@@ -8,9 +8,12 @@
           <span class="text-gold font-display" style="letter-spacing: 3px; font-size: 1.15rem;">STORE</span>
           <span class="text-muted q-ml-sm" style="font-family: 'Manrope', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.5px;">Admin</span>
         </q-toolbar-title>
-        <AdminChangeNotifications />
-        <OrdersNotificationBell />
-        <q-btn flat dense round>
+        <q-btn flat dense round icon="store" @click="$router.push({ name: 'catalogo' })" class="q-ml-xs" />
+        <q-btn flat dense round icon="currency_exchange" @click="$router.push({ name: 'admin-cambio' })" class="q-ml-xs" /> 
+         
+           <OrdersNotificationBell />
+            <AdminChangeNotifications />
+         <q-btn flat dense round>
           <q-icon name="person" />
           <q-menu class="rc-admin-menu">
             <q-item>
@@ -21,8 +24,9 @@
               <q-item-section class="text-muted">Cerrar sesión</q-item-section>
             </q-item>
           </q-menu>
-        </q-btn><q-btn flat dense round icon="currency_exchange" @click="$router.push({ name: 'admin-cambio' })" class="q-ml-xs" />
-        <q-btn flat dense round icon="store" @click="$router.push({ name: 'catalogo' })" class="q-ml-xs" />
+          </q-btn>
+      
+       
       </q-toolbar>
     </q-header>
 

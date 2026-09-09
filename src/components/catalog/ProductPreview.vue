@@ -29,6 +29,7 @@
           no-caps
           @click="addToCart"
         />
+        <div class="q-mt-lg text-subtitle2 text-grey-5">{{ currentProduct?.descripcion }}</div>
       </div>
     </q-card>
   </q-dialog>

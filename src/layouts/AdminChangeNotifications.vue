@@ -6,14 +6,14 @@
     <q-menu v-model="menuOpen" class="rc-notif-menu" :context-menu="false" anchor="bottom right" self="top right">
       <q-list style="min-width: 260px; max-height: 60vh" separator>
         <q-item>
-          <q-item-section class="text-subtitle2">Cambios recientes</q-item-section>
+          <q-item-section class="text-subtitle2 text-grey-8">Cambios recientes</q-item-section>
           <q-item-section side>
             <q-btn dense flat size="sm" icon="clear_all" @click="clear" :disable="count === 0" />
           </q-item-section>
         </q-item>
         <q-separator />
         <q-item v-if="count === 0">
-          <q-item-section class="text-muted">Sin cambios</q-item-section>
+          <q-item-section class="text-muted text-grey-9">Sin cambios</q-item-section>
         </q-item>
         <q-item v-for="(c, idx) in items" :key="c.at + '-' + idx">
           <q-item-section avatar>
